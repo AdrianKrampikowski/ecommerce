@@ -1,0 +1,27 @@
+h2 {
+  //   color: white;
+  cursor: pointer;
+  &:hover {
+    text-decoration: white underline;
+    text-underline-offset: 25px;
+    text-decoration-thickness: 3px;
+  }
+}
+
+.header-container {
+  background-color:transparent;
+  justify-content: space-between;
+}
+
+.headline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+}
+
+.button {
+  &:hover {
+    transform: scale(1.25);
+  }
+}
