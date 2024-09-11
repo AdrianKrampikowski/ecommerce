@@ -4,15 +4,23 @@
   width: 100vw;
   height: 600px;
   z-index: -1;
-  // background-size: contain;
+}
+
+.top-img {
+  height: 100%;
+  width: 100%;
   background-image: url("../../../assets/img/img-1-slider.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  h1 {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    color: white;
+  }
 }
 
-.img {
-  width: 100vw;
-  height: 500px;
-  object-fit: contain;
+.collection-container {
+  padding-top: 50px;
 }

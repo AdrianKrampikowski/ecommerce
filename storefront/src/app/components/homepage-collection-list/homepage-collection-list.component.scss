@@ -1,0 +1,13 @@
+.collection-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.collection-img {
+  img {
+    width: 600px;
+    height: 480px;
+  }
+}

@@ -1,0 +1,24 @@
+.example-container {
+  height: 100vh;
+  width: 300px;
+  background: #eee;
+}
+
+:host ::ng-deep mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 50px;
+  padding-left: 25px;
+}
+
+:host ::ng-deep mat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+:host ::ng-deep mat-list-item {
+  gap: 5px;
+}
