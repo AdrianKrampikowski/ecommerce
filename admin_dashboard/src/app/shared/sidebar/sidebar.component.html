@@ -3,8 +3,8 @@
         <mat-list>
             @for (sidebar of sidebars; track sidebar) {
             <mat-list-item>
-                <mat-icon matListItemIcon>{{sidebar.img}}</mat-icon>
-                <div matListItemTitle>{{sidebar.name}}</div>
+                <mat-icon matListItemIcon class="sidebar-text-color">{{sidebar.img}}</mat-icon>
+                <div matListItemTitle class="sidebar-text-color">{{sidebar.name}}</div>
             </mat-list-item>
             }
         </mat-list>

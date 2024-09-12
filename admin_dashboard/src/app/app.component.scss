@@ -1,4 +1,13 @@
 .container {
   display: flex;
-  gap: 25px;
+}
+
+.right-side {
+  width: calc(95vw - 300px);
+  margin: 0 auto;
+  padding-top: 25px; //Later
+}
+
+:host ::ng-deep router-outlet {
+  width: 100%;
 }

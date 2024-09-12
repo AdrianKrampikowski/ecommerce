@@ -1,7 +1,7 @@
 .example-container {
   height: 100vh;
   width: 300px;
-  background: #eee;
+  background-color: #ddd;
 }
 
 :host ::ng-deep mat-drawer-content {
@@ -21,4 +21,8 @@
 
 :host ::ng-deep mat-list-item {
   gap: 5px;
+}
+
+.sidebar-text-color {
+  color: black !important;
 }
