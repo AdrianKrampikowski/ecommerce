@@ -78,3 +78,41 @@ $borderRadius: 21px;
     z-index: 2;
   }
 }
+
+table {
+  width: 100%;
+}
+
+.no-column {
+  // width: 50px; // Narrow width for the "No." column
+  text-align: center;
+}
+
+.aligned-header {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.product-img-name {
+  padding-left: 20px; // Match the header padding
+  display: flex; // Ensure the image and text align in a row
+
+  .product-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; // Adds space between the image and name
+  }
+
+  img {
+    height: 40px; // Set a fixed height for the image
+    width: 40px; // You can adjust the width if necessary
+    object-fit: contain; // Ensures the image is fully visible without distortion
+  }
+
+  .product-name {
+    text-align: left;
+    white-space: nowrap; // Prevents text from wrapping under the image
+    overflow: hidden; // Ensures long text doesn't overflow the cell
+    text-overflow: ellipsis; // Adds "..." if the text is too long
+  }
+}
