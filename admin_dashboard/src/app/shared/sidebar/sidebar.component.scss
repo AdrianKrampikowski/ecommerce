@@ -1,16 +1,18 @@
-.example-container {
+:host ::ng-deep mat-drawer-container {
   height: 100vh;
   width: 300px;
   background-color: #ddd;
-}
-
-:host ::ng-deep mat-drawer-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 50px;
   padding-left: 25px;
+}
+
+:host ::ng-deep mat-expansion-panel {
+  background-color: #ddd;
+  color: black;
 }
 
 :host ::ng-deep mat-list {
@@ -20,9 +22,9 @@
 }
 
 :host ::ng-deep mat-list-item {
+  color: black !important;
   gap: 5px;
 }
 
 .sidebar-text-color {
-  color: black !important;
 }
