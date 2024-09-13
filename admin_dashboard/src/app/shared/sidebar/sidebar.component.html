@@ -1,6 +1,35 @@
 <mat-drawer-container class="example-container">
     <mat-drawer-content>
         <mat-list>
+            <ng-container *ngFor="let sidebar of sidebars; let i = index">
+                <mat-expansion-panel *ngIf="sidebar.subItems?.length; else singleItem">
+                    <mat-expansion-panel-header>
+                        <mat-icon matListItemIcon>{{ sidebar.img }}</mat-icon>
+                        <span>{{ sidebar.name }}</span>
+                    </mat-expansion-panel-header>
+                    <mat-list>
+                        <mat-list-item *ngFor="let subItem of sidebar.subItems">
+                            <mat-icon matListItemIcon>subdirectory_arrow_right</mat-icon>
+                            <span>{{ subItem.name }}</span>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+
+                <ng-template #singleItem>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>{{ sidebar.img }}</mat-icon>
+                        <div matListItemTitle>{{ sidebar.name }}</div>
+                    </mat-list-item>
+                </ng-template>
+            </ng-container>
+        </mat-list>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+<!-- <mat-drawer-container class="example-container">
+    <mat-drawer-content>
+        <mat-list>
             @for (sidebar of sidebars; track sidebar) {
             <mat-list-item>
                 <mat-icon matListItemIcon class="sidebar-text-color">{{sidebar.img}}</mat-icon>
@@ -9,4 +38,4 @@
             }
         </mat-list>
     </mat-drawer-content>
-</mat-drawer-container>
+</mat-drawer-container> -->
