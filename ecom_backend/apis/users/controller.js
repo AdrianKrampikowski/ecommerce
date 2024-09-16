@@ -40,7 +40,7 @@ const login = async (req, resp) => {
 
 const getAllUsers = async (req, resp) => {
     try {
-        let users = await User.find({}).where("is_admin").equals(false).exec();
+        let users = await User.find({}).where("is_admin", false).where("is_deleted", false);
         if (users.length > 0) {
             resp.status(200).json(users);
         } else {
@@ -54,7 +54,7 @@ const getAllUsers = async (req, resp) => {
 const getUser = async (req, resp) => {
     const { _id } = req.body;
     try {
-        let user = await User.findById(_id).where("is_admin").equals(false).exec();
+        let user = await User.findById(_id).where("is_admin", false).where("is_deleted", false);
         if (user) {
             resp.status(200).json(user);
         } else {
@@ -63,6 +63,74 @@ const getUser = async (req, resp) => {
     } catch (error) {
         resp.status(400).json({ message: error.message });
     }
-}
+};
 
-module.exports = { signUp, login, getAllUsers, getUser };
+const updateUser = async (req, resp) => {
+    const { id, first_name, last_name, address, phone_number, email } = req.body;
+    try {
+        const user = await User.findById(id).where("is_deleted", false);
+        if (user) {
+            user.first_name = first_name;
+            user.last_name = last_name;
+            user.address = address;
+            user.phone_number = phone_number;
+            user.email = email;
+            user.updated_at = Date.now();
+            await user.save();
+            resp.status(200).json({ message: `${user.first_name} ${user.last_name} hast been updated` })
+        } else {
+            resp.status(404).json({ message: 'User not found' })
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message })
+    }
+};
+
+const softDeleteUser = async (req, resp) => {
+    try {
+        const user = await User.findById(req.body.id).where("is_admin", false);
+        if (user) {
+            user.is_deleted = true;
+            await user.save();
+            resp.status(200).json({ message: `${user.first_name} ${user.last_name} hast been deleted` })
+        } else {
+            resp.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+    }
+};
+
+const changePassword = async (req, resp) => {
+    const { id, password, new_password } = req.body;
+    try {
+        const user = await User.findById(id).where("is_admin", false).where("is_deleted", false);
+        if (user.password == password) {
+            user.password = new_password;
+            await user.save();
+            resp.status(200).json({ message: 'Password changed' });
+        } else {
+            resp.status(404).json({ message: 'Incorrect Password' });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+    }
+};
+
+const setNewAdmin = async (req, resp) => {
+    const { id } = req.body;
+    try {
+        const user = await User.findById(id).where("is_deleted", false);
+        if (user) {
+            user.is_admin = true;
+            await user.save();
+            resp.status(200).json({ message: 'is_admin set to true' });
+        } else {
+            resp.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+    }
+};
+
+module.exports = { signUp, login, getAllUsers, getUser, updateUser, softDeleteUser, changePassword, setNewAdmin };
