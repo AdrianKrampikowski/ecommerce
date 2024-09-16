@@ -1,4 +1,6 @@
 <div class="collection-container">
-    <div class="collection-img"><img src="../../../assets/img/Image20240911163322.png" alt=""></div>
-    <div class="collection-img"><img src="../../../assets/img/Image20240911164557.png" alt=""></div>
+    <h1>Obsessive Attention. Intelligent Effort.</h1>
+    <div class="collection-img" *ngFor="let imgSrc of images">
+        <img [src]="imgSrc" alt="">
+    </div>
 </div>
