@@ -23,4 +23,19 @@ const getAllCollections = async (req, resp) => {
     }
 };
 
-module.exports = { createCollection, getAllCollections };
+const getCollection = async (req, resp) => {
+    const { id } = req.body;
+    try {
+        let collection = await Collection.find({ _id: id }).where("is_deleted", false);
+        if (collection) {
+            resp.status(200).json(collection);
+        } else {
+            resp.status(404).json({ message: 'Collection not found' });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+
+    }
+};
+
+module.exports = { createCollection, getAllCollections, getCollection };
