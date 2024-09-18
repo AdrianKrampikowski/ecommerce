@@ -41,23 +41,22 @@ const getCollection = async (req, resp) => {
 const updateCollection = async (req, resp) => {
     const { id, title, description, conditions, images, tags } = req.body;
     try {
-        let collection = await Collection.find({ _id: id }).where("is_deleted", false);
+        let collection = await Collection.findById({ _id: id }).where("is_deleted", false);
         if (collection) {
             collection.title = title;
             collection.description = description;
             collection.conditions = conditions;
             collection.images = images;
             collection.tags = tags;
-            collection.save();
+            await collection.save();
             resp.status(200).json({ message: "Collection updated" });
-
         } else {
             resp.status(404).json({ message: 'Updated failed' });
         }
     } catch (error) {
         resp.status(400).json({ message: error.message });
     }
-}
+};
 
 
-module.exports = { createCollection, getAllCollections, getCollection };
+module.exports = { createCollection, getAllCollections, getCollection, updateCollection };
