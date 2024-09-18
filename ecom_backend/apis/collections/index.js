@@ -6,8 +6,10 @@ const role = require("../../middleware/roles");
 
 
 router.route("/createCollection").post(auth, role, collectionController.createCollection);
-router.route("/getAllCollections").get(collectionController.getAllCollections);
-router.route("/getCollection").get(collectionController.getCollection);
-router.route("/updateCollection").patch(collectionController.updateCollection);
+router.route("/getAllCollections").get(auth, collectionController.getAllCollections);
+router.route("/getCollection").get(auth, collectionController.getCollection);
+router.route("/updateCollection").patch(auth, role, collectionController.updateCollection);
+router.route("/softDeleteCollection").patch(auth, role, collectionController.softDeleteCollection);
+
 
 module.exports = router;

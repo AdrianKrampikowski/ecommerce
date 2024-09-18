@@ -1,4 +1,5 @@
 const Collection = require("./model");
+const SubCollections = require("../sub_collections/model");
 
 const createCollection = async (req, resp) => {
     try {
@@ -58,5 +59,28 @@ const updateCollection = async (req, resp) => {
     }
 };
 
+const softDeleteCollection = async (req, resp) => {
+    const { id } = req.body;
+    try {
+        let subCollections = await SubCollections.find({}).where("collection_id", id);
+        console.log('subCollections', subCollections);
 
-module.exports = { createCollection, getAllCollections, getCollection, updateCollection };
+        if (subCollections.length < 1) {
+            let collection = await Collection.findById({ _id: id }).where("is_deleted", false);
+            if (collection) {
+                collection.is_deleted = true;
+                await collection.save();
+                resp.status(200).json({ message: "Collection deleted" });
+            } else {
+                resp.status(404).json({ message: 'Deleting failed' });
+            }
+        } else {
+            resp.status(404).json({ message: 'This collection is associated with other Collections. To delete remove this sub collection' });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+    }
+};
+
+
+module.exports = { createCollection, getAllCollections, getCollection, updateCollection, softDeleteCollection };

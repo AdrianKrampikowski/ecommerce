@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const userRoutes = require("./apis/users/index");
 const collectionRoutes = require("./apis/collections/index");
+const subCollectionRoutes = require("./apis/sub_collections/index");
 
 const cors = require("cors");
 app.use(cors());
@@ -18,6 +19,7 @@ const { connect } = require("mongoose");
 
 app.use("/api/user", userRoutes);
 app.use("/api/collection", collectionRoutes);
+app.use("/api/subCollection", subCollectionRoutes);
 
 const start = async () => {
     try {
