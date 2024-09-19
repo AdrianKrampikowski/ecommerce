@@ -4,6 +4,7 @@ const userRoutes = require("./apis/users/index");
 const collectionRoutes = require("./apis/collections/index");
 const subCollectionRoutes = require("./apis/sub_collections/index");
 const productRoutes = require("./apis/products/index");
+const orderRoutes = require("./apis/orders/index");
 
 const cors = require("cors");
 app.use(cors());
@@ -22,7 +23,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/collection", collectionRoutes);
 app.use("/api/subCollection", subCollectionRoutes);
 app.use("/api/product", productRoutes);
-
+app.use("/api/order", orderRoutes);
 
 const start = async () => {
     try {
