@@ -7,7 +7,8 @@ const role = require("../../middleware/roles");
 router.route("/createProduct").post(auth, role, productController.createProduct);
 router.route("/getAllProducts").get(auth, productController.getAllProducts);
 router.route("/getProduct").post(auth, productController.getProduct);
-router.route("/updateProduct").patch(auth, productController.updateProduct);
+router.route("/updateProduct").patch(auth, role, productController.updateProduct);
+router.route("/softDeleteProduct").patch(auth, role, productController.softDeleteProduct);
 
 
 module.exports = router;

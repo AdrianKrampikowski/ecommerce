@@ -39,7 +39,7 @@ const getProduct = async (req, resp) => {
 const updateProduct = async (req, resp) => {
     const { id, title, description, media, collection_id, subcollection_id, price, inventory, variants, product_type, vendor, tags } = req.body;
     try {
-        let product = await Product.findById(id).where("is_deleted", false);
+        let product = await Product.findById(id);
         if (product) {
             product.title = title;
             product.description = description;
@@ -62,5 +62,20 @@ const updateProduct = async (req, resp) => {
     }
 };
 
-module.exports = { createProduct, getAllProducts, getProduct, updateProduct };
+const softDeleteProduct = async (req, resp) => {
+    try {
+        let product = await Product.findById(req.body.id).where("is_deleted", false);
+        if (product) {
+            product.is_deleted = true;
+            await product.save();
+            resp.status(200).json({ message: "Products deleted" });
+        } else {
+            resp.status(404).json({ message: "Product does not exist" });
+        }
+    } catch (error) {
+        resp.status(400).json({ message: error.message });
+    }
+};
+
+module.exports = { createProduct, getAllProducts, getProduct, updateProduct, softDeleteProduct };
 
