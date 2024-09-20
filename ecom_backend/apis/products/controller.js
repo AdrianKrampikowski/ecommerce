@@ -12,9 +12,27 @@ const createProduct = async (req, resp) => {
 
 const getAllProducts = async (req, resp) => {
     try {
-        let products = await Product.find({}).where("is_deleted", false);
-        if (products) {
-            resp.status(200).json(products);
+        const { page, limit, sortOptions } = req.pagination;
+        const skip = (page - 1) * limit;
+
+        const products = await Product.find()
+            .where("is_deleted", false)
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit);
+
+        const totalItems = await Product.countDocuments();
+
+        if (products.length > 0) {
+            resp.status(200).json({
+                data: products,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(totalItems / limit),
+                    totalItems: totalItems,
+                    pageSize: limit
+                }
+            });
         } else {
             resp.status(404).json({ message: "no Products found" });
         }

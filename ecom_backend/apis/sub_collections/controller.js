@@ -13,9 +13,27 @@ const createSubCollection = async (req, resp) => {
 
 const getAllSubCollections = async (req, resp) => {
     try {
-        let subCollections = await SubCollection.find({}).where("is_deleted", false);
+        const { page, limit, sortOptions } = req.pagination;
+        const skip = (page - 1) * limit;
+
+        const subCollections = await SubCollection.find()
+            .where("is_deleted", false)
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit);
+
+        const totalItems = await SubCollection.countDocuments();
+
         if (subCollections.length > 0) {
-            resp.status(200).json(subCollections);
+            resp.status(200).json({
+                data: subCollections,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(totalItems / limit),
+                    totalItems: totalItems,
+                    pageSize: limit
+                }
+            });
         } else {
             resp.status(404).json({ message: "no sub collection found" });
         }

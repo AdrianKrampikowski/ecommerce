@@ -13,9 +13,27 @@ const createCollection = async (req, resp) => {
 
 const getAllCollections = async (req, resp) => {
     try {
-        let collections = await Collection.find({}).where("is_deleted", false);
-        if (collections) {
-            resp.status(200).json(collections);
+        const { page, limit, sortOptions } = req.pagination;
+        const skip = (page - 1) * limit;
+
+        const collections = await Collection.find()
+            .where("is_deleted", false)
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit);
+
+        const totalItems = await Collection.countDocuments();
+
+        if (collections.length > 0) {
+            resp.status(200).json({
+                data: collections,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(totalItems / limit),
+                    totalItems: totalItems,
+                    pageSize: limit
+                }
+            });
         } else {
             resp.status(404).json({ message: 'No Collection found' });
         }

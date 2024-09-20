@@ -22,9 +22,27 @@ const createOrderByCustomer = async (req, resp) => {
 
 const getAllOrders = async (req, resp) => {
     try {
-        let orders = await Order.find({}).where("is_deleted", false);
-        if (orders) {
-            resp.status(200).json(orders);
+        const { page, limit, sortOptions } = req.pagination;
+        const skip = (page - 1) * limit;
+
+        const orders = await Order.find()
+            .where("is_deleted", false)
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit);
+
+        const totalItems = await Order.countDocuments();
+
+        if (orders.length > 0) {
+            resp.status(200).json({
+                data: orders,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(totalItems / limit),
+                    totalItems: totalItems,
+                    pageSize: limit
+                }
+            });
         } else {
             resp.status(404).json({ message: "No order found" });
         }
@@ -80,4 +98,4 @@ const softDeleteOrder = async (req, resp) => {
 };
 
 
-module.exports = { createOrder, createOrderByCustomer, getAllOrders, getOrder, updateOrder,softDeleteOrder }
+module.exports = { createOrder, createOrderByCustomer, getAllOrders, getOrder, updateOrder, softDeleteOrder }

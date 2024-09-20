@@ -1,3 +1,122 @@
+// $borderRadius: 21px;
+
+// :host ::ng-deep mat-card {
+//   background-color: white;
+//   border-radius: $borderRadius;
+// }
+
+// :host ::ng-deep mat-card-content {
+//   height: 10vh;
+//   background-color: white;
+//   padding: 0 !important;
+// }
+
+// .container {
+//   width: 100%;
+//   height: 100vh;
+// }
+
+// .header-container {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+// .top-buttons {
+//   display: flex;
+//   gap: 5px;
+//   button {
+//     background: #ddd;
+//     color: black;
+//     border-radius: 12px;
+//   }
+//   .add-product-button {
+//     background: black;
+//     color: white;
+//   }
+// }
+
+// .top-container {
+//   display: flex;
+//   border-radius: $borderRadius;
+// }
+
+// .top-contrainer-inner {
+//   //   width: 100%;
+//   padding-left: 25px;
+//   padding-right: 25px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: flex-start;
+//   gap: 10px;
+// }
+
+// .top-contrainer-inner :first-child {
+//   border-bottom: 2px dotted #000;
+// }
+
+// .seperator {
+//   width: 1px;
+//   height: 80%;
+//   background-color: lightgrey;
+// }
+
+// .mat-elevation-z8 {
+//   background-color: white;
+//   th,
+//   td {
+//     color: black;
+//   }
+// }
+
+// .product-img-name {
+//   display: flex;
+//   align-items: center;
+//   img {
+//     height: 50px;
+//     margin-left: -50px;
+//     z-index: 2;
+//   }
+// }
+
+// table {
+//   width: 100%;
+// }
+
+// .no-column {
+//   // width: 50px; // Narrow width for the "No." column
+//   text-align: center;
+// }
+
+// .aligned-header {
+//   text-align: left;
+//   padding-left: 20px;
+// }
+
+// .product-img-name {
+//   padding-left: 20px; // Match the header padding
+//   display: flex; // Ensure the image and text align in a row
+
+//   .product-container {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px; // Adds space between the image and name
+//   }
+
+//   img {
+//     height: 40px; // Set a fixed height for the image
+//     width: 40px; // You can adjust the width if necessary
+//     object-fit: contain; // Ensures the image is fully visible without distortion
+//   }
+
+//   .product-name {
+//     text-align: left;
+//     white-space: nowrap; // Prevents text from wrapping under the image
+//     overflow: hidden; // Ensures long text doesn't overflow the cell
+//     text-overflow: ellipsis; // Adds "..." if the text is too long
+//   }
+// }
+
 $borderRadius: 21px;
 
 :host ::ng-deep mat-card {
@@ -41,7 +160,6 @@ $borderRadius: 21px;
 }
 
 .top-contrainer-inner {
-  //   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
   display: flex;
@@ -69,50 +187,56 @@ $borderRadius: 21px;
   }
 }
 
-.product-img-name {
-  display: flex;
-  align-items: center;
-  img {
-    height: 50px;
-    margin-left: -50px;
-    z-index: 2;
-  }
-}
-
 table {
   width: 100%;
 }
 
 .no-column {
-  // width: 50px; // Narrow width for the "No." column
   text-align: center;
 }
 
 .aligned-header {
   text-align: left;
-  padding-left: 20px;
+  padding-left: 30px;  // Align the header text with the product names
+  vertical-align: middle;  // Vertically align to middle to match the rows
+  height: 60px;  // Optional: Adjust header height if necessary
 }
 
 .product-img-name {
-  padding-left: 20px; // Match the header padding
-  display: flex; // Ensure the image and text align in a row
+  display: flex;
+  align-items: center;
+  padding-left: 30px; // Align the row cells with the header
+}
 
-  .product-container {
-    display: flex;
-    align-items: center;
-    gap: 10px; // Adds space between the image and name
-  }
+.product-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Space between the image and name
+}
 
-  img {
-    height: 40px; // Set a fixed height for the image
-    width: 40px; // You can adjust the width if necessary
-    object-fit: contain; // Ensures the image is fully visible without distortion
-  }
+img {
+  height: 30px; // Adjust the image size
+  width: 30px;
+  object-fit: contain; // Ensure the image fits without distortion
+  border-radius: 5px; // Optional: add subtle border-radius for better presentation
+}
 
-  .product-name {
-    text-align: left;
-    white-space: nowrap; // Prevents text from wrapping under the image
-    overflow: hidden; // Ensures long text doesn't overflow the cell
-    text-overflow: ellipsis; // Adds "..." if the text is too long
-  }
+.product-name {
+  white-space: nowrap;  // Prevent text from wrapping
+  overflow: hidden;     // Hide overflowed text
+  text-overflow: ellipsis; // Show ellipsis if text is too long
+  max-width: 200px;     // Set a max width for the product name
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+  padding-left: 30px;  // Match header padding with row padding for alignment
+  vertical-align: middle;  // Ensure vertical alignment matches the rows
+  height: 60px;  // Ensure the header row height matches the row height
+}
+
+td {
+  padding-left: 30px;  // Align row cells with the header
+  vertical-align: middle;  // Vertically align the content in the middle
 }

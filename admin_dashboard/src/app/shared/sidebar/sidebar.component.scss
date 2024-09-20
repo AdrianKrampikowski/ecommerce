@@ -10,10 +10,10 @@
   padding-left: 25px;
 }
 
-:host ::ng-deep mat-expansion-panel {
-  background-color: #ddd;
-  color: black;
-}
+// :host ::ng-deep mat-expansion-panel {
+//   background-color: #ddd;
+//   color: black;
+// }
 
 :host ::ng-deep mat-list {
   display: flex;
@@ -22,9 +22,16 @@
 }
 
 :host ::ng-deep mat-list-item {
-  gap: 5px;
+  // gap: 5px;
+  cursor: pointer !important;
+  width: 250px;
+  &:hover {
+    // scale: 1.1;
+    background-color: whitesmoke;
+    border-radius: 12px;
+  }
 }
 
 .sidebar-text-color {
-  color: black;
+  color: black !important;
 }

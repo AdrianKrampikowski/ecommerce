@@ -40,9 +40,28 @@ const login = async (req, resp) => {
 
 const getAllUsers = async (req, resp) => {
     try {
-        let users = await User.find({}).where("is_admin", false).where("is_deleted", false);
+        const { page, limit, sortOptions } = req.pagination;
+        const skip = (page - 1) * limit;
+
+        const users = await User.find()
+            .where("is_admin", false)
+            .where("is_deleted", false)
+            .sort(sortOptions)
+            .skip(skip)
+            .limit(limit);
+
+        const totalItems = await User.countDocuments();
+
         if (users.length > 0) {
-            resp.status(200).json(users);
+            resp.status(200).json({
+                data: users,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(totalItems / limit),
+                    totalItems: totalItems,
+                    pageSize: limit
+                }
+            });
         } else {
             resp.status(404).json({ message: "No User Found" });
         }

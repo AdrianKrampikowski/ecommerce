@@ -34,12 +34,20 @@ export class SidebarComponent {
     },
     {
       img: 'store',
+      name: 'Collections',
+    },
+    {
+      img: 'store',
+      name: 'Sub Collections',
+    },
+    {
+      img: 'store',
       name: 'Products',
-      subItems: [
-        { name: 'Electronics' },
-        { name: 'Apparel' },
-        { name: 'Books' },
-      ],
+      // subItems: [
+      //   { name: 'Electronics' },
+      //   { name: 'Apparel' },
+      //   { name: 'Books' },
+      // ],
     },
     {
       img: 'people',
