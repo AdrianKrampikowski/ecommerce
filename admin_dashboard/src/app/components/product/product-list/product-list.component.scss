@@ -211,7 +211,10 @@ table {
 .product-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+}
+
+.product-img-name img {
+  margin-right: 10px;
 }
 
 img {
