@@ -9,9 +9,6 @@ import { MatTableModule } from '@angular/material/table';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
 })
-
-// abc
-
 export class ProductListComponent implements OnInit {
   ELEMENT_DATA: any[] = [
     {
