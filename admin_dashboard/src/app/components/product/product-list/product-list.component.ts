@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 
 
+
 export class ProductListComponent implements OnInit {
   ELEMENT_DATA: any[] = [
     {
